@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-export default class NameStore {
+export default class ExerciseStore {
   name : string = "";
 
   setName(name : string) {
