@@ -8,9 +8,9 @@ export class ExerciseModel {
   @observable public category: string;
   @observable public complete_word: string;
   @observable public letter_pool: string[];
-  @observable public sorted_letter_pool: string[];
   @observable public answer_word: string;
   @observable public accurate: boolean;
+  @observable public sorted_letter_pool: string[];
 
   constructor(id: number, started: boolean, finished: boolean, category: string,
     complete_word: string, letter_pool: string[], sorted_letter_pool: string[]) {
