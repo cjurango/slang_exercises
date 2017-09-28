@@ -7,16 +7,15 @@ import { ExerciseModel } from '../../models/exerciseModel';
 @remotedev({ global: true })
 export default class ExerciseStore {
 
-  @observable
-  public exercise : ExerciseModel;
+  @observable public exercise: ExerciseModel;
+  @observable public progress: number;
 
   constructor() {
-    this.nextExercise = this.nextExercise.bind(this);
-    this.submitAnswer = this.submitAnswer.bind(this);
+    this.getProgress();
   }
 
   @action
-  async nextExercise() {
+  nextExercise = async () => {
     try {
       const response = await request.post('/exercises/');
       const ex = response.data;
@@ -29,7 +28,7 @@ export default class ExerciseStore {
   }
 
   @action
-  async submitAnswer(answerPool: string[]) {
+  submitAnswer = async (answerPool: string[]) => {
     try {
       const answer = answerPool.join('');
       this.exercise.accurate = answer === this.exercise.letter_pool.join('');
@@ -42,6 +41,18 @@ export default class ExerciseStore {
         }
       }
       await request.put('/exercises/' + this.exercise.id, answerBody);
+      this.getProgress();
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+  @action
+  getProgress = async () => {
+    try {
+      const response = await request.get('/exercises/progress');
+      const ex = response.data;
+      this.progress = ex.progress;
     } catch(error) {
       console.error(error);
     }

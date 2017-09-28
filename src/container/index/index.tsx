@@ -35,7 +35,7 @@ class Index extends Component<IndexListProps, {}> {
     })();
     return (
       <div className="index">
-        <Header></Header>
+        <Header progress={exerciseStore.progress}></Header>
         {body}
         <Footer></Footer>
       </div>
