@@ -20,21 +20,30 @@ export default class ExerciseStore {
     try {
       const response = await request.post('/exercises/');
       const ex = response.data;
+      const sortedPool = [...ex.word.letter_pool].sort(() => Math.random() * 2 - 1);
       this.exercise = new ExerciseModel(ex.id, ex.started, ex.finished, 
-        ex.category, ex.word.complete_word, ex.word.letter_pool,
-        ex.word.letter_pool.sort(() => Math.random() * 2 - 1));
+        ex.category, ex.word.complete_word, ex.word.letter_pool, sortedPool);
     } catch(error) {
       console.error(error);
     }
   }
 
   @action
-  submitAnswer(answer: string): void {
-    if (answer === this.exercise.complete_word) {
+  async submitAnswer(answerPool: string[]) {
+    try {
+      const answer = answerPool.join('');
+      this.exercise.accurate = answer === this.exercise.letter_pool.join('');
       this.exercise.answer_word = answer;
-      this.exercise.accurate = true;
-  	} else {
-      this.exercise.accurate = false;
+      const answerBody = {
+        finished: true,
+        answer: {
+          answer_word: this.exercise.answer_word,
+          accurate: this.exercise.accurate
+        }
+      }
+      await request.put('/exercises/' + this.exercise.id, answerBody);
+    } catch(error) {
+      console.error(error);
     }
   }
 

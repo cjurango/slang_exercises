@@ -8,9 +8,10 @@ export class ExerciseModel {
   @observable public category: string;
   @observable public complete_word: string;
   @observable public letter_pool: string[];
-  @observable public answer_word: string;
-  @observable public accurate: boolean;
   @observable public sorted_letter_pool: string[];
+  @observable public answer_word: string;
+  @observable public answer_letter_pool: string[];
+  @observable public accurate: boolean;
 
   constructor(id: number, started: boolean, finished: boolean, category: string,
     complete_word: string, letter_pool: string[], sorted_letter_pool: string[]) {
@@ -21,6 +22,7 @@ export class ExerciseModel {
     this.complete_word = complete_word;
     this.letter_pool = letter_pool;
     this.sorted_letter_pool = sorted_letter_pool;
+    this.answer_letter_pool = [];
   };
 
 }

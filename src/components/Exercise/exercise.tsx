@@ -10,11 +10,11 @@ import { ExerciseModel } from '../../models/exerciseModel';
 export interface ExerciseListProps { 
   exercise: ExerciseModel; 
   nextExercise: () => any;
-  submitAnswer: (answer: string) => any;
+  submitAnswer: (answer: string[]) => any;
 }
 
 export interface ExerciseState {
-  answer: string[];
+  submitted?: boolean;
 }
 
 @observer
@@ -22,7 +22,7 @@ class Exercise extends Component<ExerciseListProps, ExerciseState> {
 
   constructor() {
     super();
-    this.state = { answer: []};
+    this.state = { submitted: false };
   }
 
   static propTypes = {
@@ -33,32 +33,52 @@ class Exercise extends Component<ExerciseListProps, ExerciseState> {
 
   handleClickNextExerciseButton = (e) => {
     const { nextExercise } = this.props;
+    this.setState({ submitted: false });
     nextExercise();
   }
 
   handleClickSubmitButton = (e) => {
-  	const { submitAnswer } = this.props;
-    submitAnswer(this.state.answer.join(''));
+    const { exercise, submitAnswer } = this.props;
+    if (!this.state.submitted &&
+      (exercise.letter_pool.length === exercise.answer_letter_pool.length)) {
+      this.setState({ submitted: true });
+      submitAnswer(exercise.answer_letter_pool);
+    }
   }
 
-  handleLetterClick = (e) => {
+  handleLetterClick = (i, e) => {
     e.preventDefault();
-    let tempAnswer: string[] = this.state.answer;
-    tempAnswer.push(e.target.textContent);
-    this.setState({ answer: tempAnswer });
+    const { exercise } = this.props;
+    exercise.sorted_letter_pool.splice(i, 1);
+    exercise.answer_letter_pool.push(e.target.textContent);
   }
 
   render() {
     const { exercise } = this.props;
+    const feedback = (() => {
+      if (this.state.submitted) {
+        if (exercise.accurate) {
+          return <p>Correct Answer!</p>;
+        } else {
+          return <p>Incorrect Answer!</p>;
+        }
+      }
+    })();
     return (
       <div>
-        <PronunciationSound></PronunciationSound>
+        <PronunciationSound word={exercise.complete_word}></PronunciationSound>
+        {feedback}
         <ul className="pool">
-          {exercise.sorted_letter_pool.map((letter, index) =>
-            <li key={index} onClick={this.handleLetterClick}>{letter}</li>
-          )}
+          {
+            exercise.sorted_letter_pool.map((letter, index) =>
+              <li key={index} onClick={this.handleLetterClick.bind(this, index)}>{letter}</li>
+            )
+          }
         </ul>
-        <Answer answer={this.state.answer}></Answer>
+        <Answer wordPool={exercise.letter_pool}
+                answerWordPool={exercise.answer_letter_pool}
+                sortedWordPool={exercise.sorted_letter_pool}
+                submitted={this.state.submitted}></Answer>
         <button className="submit-exercise"
                 onClick={this.handleClickSubmitButton}>Submit Exercise</button>
         <button className="next-exercise"
