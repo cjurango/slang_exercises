@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { observer } from 'mobx-react';
 import { oneOfType, arrayOf, string, object, boolean } from 'prop-types';
 
+import './answer.less';
+
 export interface AnswerListProps {
   wordPool: string[];
   answerWordPool?: string[];
@@ -21,6 +23,7 @@ class Answer extends Component<AnswerListProps, {}> {
   }
 
   handleAnswerLetterClick = (i, e) => {
+    e.preventDefault();
     const { sortedWordPool, answerWordPool } = this.props;
     answerWordPool.splice(i, 1);
     sortedWordPool.push(e.target.textContent);
@@ -32,12 +35,12 @@ class Answer extends Component<AnswerListProps, {}> {
       <ul className="answer_pool">
         {
           answerWordPool.map((letter, index) =>
-            <li key={index}>
+            <li key={index} onClick={!submitted && this.handleAnswerLetterClick.bind(this, index)}>
               {
                 submitted && (wordPool[index] !== letter) &&
                   <span className="correct_letter">{wordPool[index]}</span>
               }
-              <span className="answer_letter" onClick={!submitted && this.handleAnswerLetterClick.bind(this, index)}>{letter}</span>
+              <span>{letter}</span>
             </li>
           )
         }

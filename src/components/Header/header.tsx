@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { observer } from 'mobx-react';
 import { number } from 'prop-types';
 
+import './header.less';
+
 export interface HeaderListProps {
   progress: number;
 }
@@ -18,8 +20,8 @@ class Header extends Component<HeaderListProps, {}> {
   	const { progress } = this.props;
     return (
       <div className="header">
-        <p>This is a wonderfull app to practice english spelling exercises</p>
-        <p>Your overal progress is: { progress }%</p>
+        <p className="title"><strong>Slang Spelling </strong>English spelling exercises</p>
+        <p className="progress">Your progress: { progress }%</p>
       </div>
     );
   }

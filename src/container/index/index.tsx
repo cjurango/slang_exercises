@@ -29,8 +29,11 @@ class Index extends Component<IndexListProps, {}> {
                nextExercise={exerciseStore.nextExercise}
                submitAnswer={exerciseStore.submitAnswer}></Exercise>;
       } else {
-        return <button className="next-exercise"
-               onClick={ exerciseStore.nextExercise }>Start Learning</button>;
+        return <div className="start">
+          <p className="message">Click here to start your english adventure...</p>
+          <button onClick={ exerciseStore.nextExercise }>
+          Start Learning</button>
+          </div>;
       }
     })();
     return (

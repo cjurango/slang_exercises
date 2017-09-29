@@ -17,9 +17,30 @@ class PronunciationSound extends Component<PronunciationListProps, {}> {
 
   render() {
     const { word } = this.props;
+    const speechstyle = {
+      play: {
+        hover: {
+          backgroundColor: 'rgb(89, 156, 242)',
+          color:'white'
+        },
+        button: {
+          padding:'4',
+          fontFamily: 'Helvetica',
+          fontSize: '1.0em',
+          cursor: 'pointer',
+          pointerEvents: 'none',
+          outline: 'none',
+          backgroundColor: 'rgb(162, 203, 255)',
+          border: 'none',
+          width: '3em',
+          height: '3em',
+          borderRadius: '3em'
+        }
+      }
+    };
     return (
-      <Speech autostart={false} rate="0.8" text={word} lang="en-US"
-      voice="Google US English" className="speech" styles="" />
+      <Speech styles={speechstyle}  autostart={false} rate="0.8" text={word} lang="en-US"
+      voice="Google US English" />
     );
   }
 }
