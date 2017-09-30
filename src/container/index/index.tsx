@@ -26,6 +26,7 @@ class Index extends Component<IndexListProps, {}> {
     const body = (() => {
       if (exerciseStore.exercise) {
         return <Exercise exercise={exerciseStore.exercise}
+               loading={exerciseStore.loading}
                nextExercise={exerciseStore.nextExercise}
                submitAnswer={exerciseStore.submitAnswer}></Exercise>;
       } else {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom';
 import { observer } from 'mobx-react';
-import { object, func } from 'prop-types';
+import { object, func, boolean } from 'prop-types';
+import Spinner from 'halogen/ClipLoader';
 
 import PronunciationSound from '../PronunciationSound/pronunciationSound';
 import Feedback from '../Feedback/feedback';
@@ -11,7 +12,8 @@ import { ExerciseModel } from '../../models/exerciseModel';
 import './exercise.less';
 
 export interface ExerciseListProps { 
-  exercise: ExerciseModel; 
+  exercise: ExerciseModel;
+  loading: boolean;
   nextExercise: () => any;
   submitAnswer: (answer: string[]) => any;
 }
@@ -30,13 +32,14 @@ class Exercise extends Component<ExerciseListProps, ExerciseState> {
 
   static propTypes = {
     exercise: object.isRequired,
+    loading: boolean,
     nextExercise: func.isRequired,
     submitAnswer: func.isRequired
   }
 
   handleClickNextExerciseButton = (e) => {
-    const { nextExercise } = this.props;
     this.setState({ submitted: false });
+    const { nextExercise } = this.props;
     nextExercise();
   }
 
@@ -58,11 +61,18 @@ class Exercise extends Component<ExerciseListProps, ExerciseState> {
   }
 
   render() {
-    const { exercise } = this.props;
+    const { exercise, loading } = this.props;
     const canSubmitClass = 'submit-exercise ' + (this.canSubmit() ? 'allowed' : 'not-allowed')
+    const loadingOrSound = (() => {
+      if (loading) {
+        return <Spinner size="2.9em" color="rgb(42, 112, 182)"/>;
+      } else {
+        return <PronunciationSound word={exercise.complete_word}></PronunciationSound>;
+      }
+    })();
     return (
       <div className="exercise">
-        <PronunciationSound word={exercise.complete_word}></PronunciationSound>
+        <span className="fixed">{loadingOrSound}</span>
         <Feedback accurate={exercise.accurate} submitted={this.state.submitted}></Feedback>
         <Word sortedWordPool={exercise.sorted_letter_pool}
         answerWordPool={exercise.answer_letter_pool}></Word>

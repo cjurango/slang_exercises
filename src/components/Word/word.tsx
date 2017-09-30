@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom';
 import { observer } from 'mobx-react';
 import { oneOfType, arrayOf, string, object } from 'prop-types';
+import { CSSTransitionGroup } from 'react-transition-group'
 
 import './word.less';
 
@@ -29,12 +30,17 @@ class Word extends Component<WordListProps, {}> {
   	const { sortedWordPool, answerWordPool } = this.props;
     return (
       <ul className="word_pool">
-        {
-          sortedWordPool.map((letter, index) =>
-            <li key={index} onClick={this.handleWordLetterClick.bind(this, index)}>{letter}</li>
-          )
-        }
-        </ul>
+        <CSSTransitionGroup
+          transitionName="spelling"
+          transitionEnterTimeout={250}
+          transitionLeaveTimeout={150}>
+          {
+            sortedWordPool.map((letter, index) =>
+              <li key={index} onClick={this.handleWordLetterClick.bind(this, index)}>{letter}</li>
+            )
+          }
+        </CSSTransitionGroup>
+      </ul>
     );
   }
 }

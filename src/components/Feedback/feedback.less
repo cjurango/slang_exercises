@@ -1,5 +1,7 @@
+@import '../../styles/colours';
+
 .feedback {
-  margin-top: 10px;
+  margin-top: 60px;
   height: 40px;
 
   p {
@@ -10,15 +12,33 @@
   }
 
   .correct {
-    color: rgb(27, 109, 23);
+    color: @greendark;
   }
 
   .incorrect {
-    color: rgb(158, 20, 20);
+    color: @reddark;
   }
 
   .instructions {
-    color: rgb(108, 108, 108);
+    color: @graydark;
+  }
+
+  .info-enter {
+    opacity: 0.01;
+  }
+
+  .info-enter.info-enter-active {
+    opacity: 1;
+    transition: opacity 400ms ease-in;
+  }
+
+  .info-leave {
+    opacity: 1;
+  }
+
+  .info-leave.info-leave-active {
+    opacity: 0.01;
+    transition: opacity 250ms ease-in;
   }
 
 }

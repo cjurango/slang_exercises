@@ -1,3 +1,5 @@
+@import '../../styles/colours';
+
 body {
   display: block;
   margin: 0px;
@@ -16,7 +18,7 @@ body {
 .start {
   margin: 70px 0 0;
   z-index: 25;
-  background: rgb(255, 255, 255);
+  background: @white;
   display: block;
   left: 0;
   right: 0;
@@ -26,29 +28,29 @@ body {
   .message {
     display: inline;
     margin-right: 30px;
-    color: rgb(74, 127, 225);
+    color: @blue;
   }
 
   button {
     -webkit-border-radius: 6;
     -moz-border-radius: 6;
     border-radius: 6px;
-    color: rgb(255, 255, 255);
+    color: @white;
     font-size: 20px;
-    background: rgb(52, 152, 219);
+    background: @blue;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
     margin-top: 50px;
-    border: 4px solid rgb(196, 217, 255);
+    border: 4px solid @bluesoft;
   }
 
   button:hover {
-    background: #2b96d9;
-    background-image: -webkit-linear-gradient(top, #2b96d9, #67c2fa);
-    background-image: -moz-linear-gradient(top, #2b96d9, #67c2fa);
-    background-image: -ms-linear-gradient(top, #2b96d9, #67c2fa);
-    background-image: -o-linear-gradient(top, #2b96d9, #67c2fa);
-    background-image: linear-gradient(to bottom, #2b96d9, #67c2fa);
+    background: @blue;
+    background-image: -webkit-linear-gradient(top, @blue, @bluesoft);
+    background-image: -moz-linear-gradient(top, @blue, @bluesoft);
+    background-image: -ms-linear-gradient(top, @blue, @bluesoft);
+    background-image: -o-linear-gradient(top, @blue, @bluesoft);
+    background-image: linear-gradient(to bottom, @blue, @bluesoft);
     text-decoration: none;
   }
 }

@@ -9,6 +9,7 @@ export default class ExerciseStore {
 
   @observable public exercise: ExerciseModel;
   @observable public progress: number;
+  @observable public loading: boolean;
 
   constructor() {
     this.getProgress();
@@ -17,11 +18,13 @@ export default class ExerciseStore {
   @action
   nextExercise = async () => {
     try {
+      this.loading = true;
       const response = await request.post('/exercises/');
       const ex = response.data;
       const sortedPool = [...ex.word.letter_pool].sort(() => Math.random() * 2 - 1);
       this.exercise = new ExerciseModel(ex.id, ex.started, ex.finished, 
         ex.category, ex.word.complete_word, ex.word.letter_pool, sortedPool);
+      this.loading = false;
     } catch(error) {
       console.error(error);
     }
@@ -30,6 +33,7 @@ export default class ExerciseStore {
   @action
   submitAnswer = async (answerPool: string[]) => {
     try {
+      this.loading = true;
       const answer = answerPool.join('');
       this.exercise.accurate = answer === this.exercise.letter_pool.join('');
       this.exercise.answer_word = answer;
@@ -42,6 +46,7 @@ export default class ExerciseStore {
       }
       await request.put('/exercises/' + this.exercise.id, answerBody);
       this.getProgress();
+      this.loading = false;
     } catch(error) {
       console.error(error);
     }
