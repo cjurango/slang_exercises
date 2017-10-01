@@ -20,12 +20,20 @@ class Feedback extends Component<FeedbackListProps, {}> {
 
   render() {
   	const { submitted, accurate } = this.props;
+    const badImage = require('./bad.png');
+    const okImage = require('./ok.png');
     const feedback = (() => {
       if (submitted) {
         if (accurate) {
-          return <p className="correct">Correct Answer, congratulations!</p>;
+          return <span>
+                   <p className="correct">Correct Answer, congratulations!</p>
+                   <img className="image" src={okImage}/>
+                 </span>;
         } else {
-          return <p className="incorrect">Incorrect Answer!</p>;
+          return <span>
+                   <p className="incorrect">Incorrect Answer!</p>
+                   <img className="image" src={badImage}/>
+                 </span>;
         }
       } else {
         return <p className="instructions">Click in the letter to spell the word pronounced above</p>;
@@ -33,7 +41,7 @@ class Feedback extends Component<FeedbackListProps, {}> {
     })();
     return (
       <div className="feedback">
-         {feedback}
+        {feedback}
       </div>
     );
   }

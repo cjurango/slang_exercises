@@ -6,6 +6,10 @@
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-3.2.1.tgz#0039ab0e0be2a0cc22bac171d27a44588103d123"
 
+"@types/node@^8.0.31":
+  version "8.0.31"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.31.tgz#d9af61093cf4bfc9f066ca34de0175012cfb0ce9"
+
 "@types/react-dom@^0.14.17":
   version "0.14.23"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.23.tgz#cecfcfad754b4c2765fe5d29b81b301889ad6c2e"

@@ -65,6 +65,7 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
+    "@types/node": "^8.0.31",
     "@types/react-router": "^3.0.6",
     "autoprefixer": "^6.7.6",
     "ava-webpack": "^1.1.2",
