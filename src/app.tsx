@@ -19,7 +19,7 @@ export default class App extends Component<{},{}> {
             <Route path="/" component={AppIndex} />
           </Router>
         </Provider>
-        <DevTools />
+        {process.env.NODE_ENV === 'development' && <DevTools />}
       </div>
     );
   }
