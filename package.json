@@ -4,7 +4,7 @@
   "description": "Frond End web app for Slang Spelling Exercises",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.production.config.js --progress --profile --colors",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --progress --profile --colors",
+    "start": "cross-env NODE_ENV=production webpack-dev-server --config webpack.production.config.js --progress --profile --colors",
     "ava": "node ./prepare-test.js && tsc --jsx react --inlineSourceMap && ava testJs/**/*.spec.js",
     "test": "cross-env NODE_ENV=test nyc --check-coverage --lines 80  npm run ava",
     "lint": "eslint --ext js --ext jsx src || exit 0",
