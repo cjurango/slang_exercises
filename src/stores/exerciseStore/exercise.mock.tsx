@@ -3,6 +3,7 @@ import { ExerciseModel } from '../../models/exerciseModel';
 export default class ExerciseStore {
   exercise: ExerciseModel;
   progress: number;
+  loading: boolean;
 
   nextExercise = () => {
   	this.exercise = new ExerciseModel(1, true, false, 'spelling', 'test',

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom';
 import { observer } from 'mobx-react';
 import { object, func, boolean } from 'prop-types';
-import Spinner from 'halogen/ClipLoader';
+import Spinner from 'react-spinkit';
 
 import PronunciationSound from '../PronunciationSound/pronunciationSound';
 import Feedback from '../Feedback/feedback';
@@ -65,7 +65,7 @@ class Exercise extends Component<ExerciseListProps, ExerciseState> {
     const canSubmitClass = 'submit-exercise ' + (this.canSubmit() ? 'allowed' : 'not-allowed')
     const loadingOrSound = (() => {
       if (loading) {
-        return <Spinner size="2.9em" color="rgb(42, 112, 182)"/>;
+        return <Spinner name='ball-scale-ripple-multiple' fadeIn="0" color="steelblue"/>
       } else {
         return <PronunciationSound word={exercise.complete_word}></PronunciationSound>;
       }

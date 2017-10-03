@@ -34,7 +34,8 @@ class PronunciationSound extends Component<PronunciationListProps, {}> {
           border: 'none',
           width: '3em',
           height: '3em',
-          borderRadius: '3em'
+          borderRadius: '3em',
+          margin: '-1.5em'
         }
       }
     };

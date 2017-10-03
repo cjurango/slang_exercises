@@ -12,6 +12,7 @@ export default class ExerciseStore {
   @observable public loading: boolean;
 
   constructor() {
+    this.loading = false;
     this.getProgress();
   }
 
