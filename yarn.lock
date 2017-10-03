@@ -388,7 +388,7 @@ ava@^0.15.2:
   optionalDependencies:
     chokidar "^1.4.2"
 
-awesome-typescript-loader@^3.0.8:
+awesome-typescript-loader@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/awesome-typescript-loader/-/awesome-typescript-loader-3.2.3.tgz#aa2119b7c808a031e2b28945b031450a8975367f"
   dependencies:
